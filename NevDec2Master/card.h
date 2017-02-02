@@ -13,7 +13,6 @@ private:
 	card * next;
 public:
 	card(enum suit suit, enum value value);
-	card(int);
 
 	void setSuit(enum suit suit);
 	void setValue(enum value value);
