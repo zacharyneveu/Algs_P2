@@ -1,25 +1,38 @@
+#ifndef CARD_H
+#define CARD_H
+
 //Some includes
-#include <iostream>
-#include <string>
+//Return the face Value of this card
 
 //enumeration for the card suits
-enum suit {CLUB, DIAMOND, HEART, SPADE};
+typedef enum suit {CLUB, DIAMOND, HEART, SPADE} Suit;
 
 //enumeration for the card face value
-enum value {ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT,
-			NINE, TEN, JACK, QUEEN, KING};
+typedef enum value {ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT,
+			NINE, TEN, JACK, QUEEN, KING} Value;
 
 class card {
 private:
-	enum suit suit;
-	enum value value;
+	Suit suit;
+	Value value;
 public:
-	card(enum suit suit, enum value value);
+	//constructor for card
+	card(Suit suit, Value value);
 
-	void setSuit(enum suit suit);
-	void setValue(enum value value);
-	enum suit getSuit();
-	enum suit getValue();
+	//Set the Suit value of this card
+	void setSuit(Suit suit);
 
+	//Sets the face Value of this card
+	void setValue(Value value);
+
+	//Returns the Suit of this card
+	Suit getSuit() const;
+
+	//Return the face Value of this card
+	Value getValue() const;
+
+	//converts a card to a string representation, for printing to ostream
 	friend ostream& operator<< (ostream& ostr, const card &card);
 };
+
+#endif
