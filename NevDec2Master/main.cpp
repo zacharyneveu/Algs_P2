@@ -10,7 +10,7 @@ int main() {
 	cout << "Printing the deck:\n";
 	cout << deck << endl << endl;
 
-
+	//Shuffle the deck
 	deck.shuffle();
 	cout << "Printing the shuffled deck:";
 	cout << deck << endl << endl;
