@@ -2,7 +2,11 @@
 #define CARD_H
 
 //Some includes
+#include <iostream>
+#include <string>
 //Return the face Value of this card
+
+using namespace std;
 
 //enumeration for the card suits
 typedef enum suit {CLUB, DIAMOND, HEART, SPADE} Suit;
@@ -18,7 +22,7 @@ private:
 public:
 	//constructor for card
 	card(Suit suit, Value value);
-	card(const card &card);
+	//card(const card &card);
 
 	//Set the Suit value of this card
 	void setSuit(Suit suit);
@@ -31,6 +35,10 @@ public:
 
 	//Return the face Value of this card
 	Value getValue() const;
+
+	string toString();
+
+	
 
 	//converts a card to a string representation, for printing to ostream
 	friend ostream& operator<< (ostream& ostr, const card &card);

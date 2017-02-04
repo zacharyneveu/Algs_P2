@@ -9,13 +9,31 @@
 
 //Constructor initializes deck with all cards in order
 deck::deck() {
-	head = NULL;
-	node<card> * current = NULL;
+	head=NULL;
+	node<card> *currNode=NULL;
+	node<card> *nextNode=NULL;
+	card *newCard = NULL;
+	for (int i=0; i<4; i++)
+	{
+		for (int j=0; j<13; j++)
+		{
+			newCard = new card((suit)i,(enum value)j);
+			//if triggers first time through
+			if (i==0&&j==0)
+			{
+				//create node with null next pointer first time through
+				nextNode = new node<card> (*newCard,NULL);
+				head = nextNode;
+			}
+			else
+			{
+				//create node with next pointer to existing node
+				nextNode = new node<card>(*newCard, currNode);
+				head = nextNode;
+			}
 
-	head = new node<card>(new card((Suit)0 % 4, (Value)0 % 13), NULL);
-	temp = head;
-	for (int i = 1; i < 52; i++) {
-		node<card> * temp = new node<card>(new card((Suit)0 % 4, (Value)0 % 13), NULL);
+			currNode = nextNode;
+		}
 	}
 }
 
