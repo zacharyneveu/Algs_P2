@@ -12,10 +12,18 @@ deck::deck() {
 	head = NULL;
 	node<card> * current = NULL;
 
-	head = new node<card>(new card((Suit)0 % 4, (Value)0 % 13), NULL);
-	temp = head;
-	for (int i = 1; i < 52; i++) {
-		node<card> * temp = new node<card>(new card((Suit)0 % 4, (Value)0 % 13), NULL);
+	card * tempCard = new card((suit)0, (value)0);
+	head = new node<card>(*tempCard, NULL);
+	current = head;
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 13; j++) {
+			if (!(i == 0 && j == 0)) {
+				tempCard = new card((suit)(i), (value)(j));
+				node<card> * temp = new node<card>(*tempCard, NULL);
+				current->next = temp;
+				current = temp;
+			}
+		}
 	}
 }
 
@@ -72,6 +80,7 @@ ostream& operator<< (ostream& ostr, const deck& deck) {
 	do {
 		//print the card
 		ostr << cardNode.nodeValue << " ";
+		cardNode = *cardNode.next;
 
 		//if the line reaches the maximum number of cards add a line
 		if (++lineMarker == 13) {
@@ -80,6 +89,8 @@ ostream& operator<< (ostream& ostr, const deck& deck) {
 			lineMarker = 0;
 		}
 	} while (cardNode.next != NULL);
+
+	ostr << cardNode.nodeValue << endl;
 
 	return ostr;
 }
