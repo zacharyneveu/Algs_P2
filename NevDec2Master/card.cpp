@@ -12,6 +12,12 @@ card::card(Suit suit, Value value) {
 	this->value = value;
 }
 
+//constructor for the card class
+card::card(const card &card) {
+	this->suit = card.suit;
+	this->value = card.value;
+}
+
 //Set the Suit value of this card
 void card::setSuit(Suit suit) {
 	this->suit = suit;
