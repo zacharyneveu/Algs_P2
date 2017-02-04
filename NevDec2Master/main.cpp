@@ -3,7 +3,12 @@
 
 #include <iostream>
 
+//define the maximum number of cards that should be printed to a line.
+const int MAXLINE = 13;
+
 int main() {
+	//defines the maximum cards printed to a line
+
 	cout << "Initializing the deck" << endl;
 	deck theDeck();
 
