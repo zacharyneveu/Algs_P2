@@ -8,6 +8,35 @@
 
 extern const int MAXLINE;
 
+//Constructor initializes deck with all cards in order
+deck::deck() {
+	node<card> *head=NULL;
+	node<card> *currNode=NULL;
+	node<card> *nextNode=NULL;
+	card *newCard = NULL;
+	for (int i=0; i<4; i++)
+	{
+		for (int j=0; j<13; j++)
+		{
+			newCard = new card((Suit)i,(Value)j);
+			//if triggers first time through
+			if (i==0&&j==0)
+			{
+				//create node with null next pointer first time through
+				nextNode = new node<card> (*newCard,NULL);
+				head = nextNode;
+			}
+			else
+			{
+				//create node with next pointer to existing node
+				nextNode = new node<card>(*newCard,currNode)
+			}
+
+			currNode = nextNode;
+		}
+	}
+}
+
 //the deconstructDeck function takes the linked list deck and converts it
 //into a vector for use by the shuffle function
 vector<node<card>> deck::deconstructDeck() {
@@ -48,7 +77,7 @@ void deck::shuffle() {
 	reconstructDeck(deck);
 }
 
-//Overloaded operator << displays the values stored in a card. 
+//Overloaded operator << displays the values stored in a card.
 ostream& operator<< (ostream& ostr, const deck& deck) {
 	int lineMarker = 0;
 	node<card> cardNode = *deck.head;
