@@ -6,6 +6,7 @@
 #include "card.h"
 #include "d_node.h"
 
+extern const int MAXLINE;
 
 //the deconstructDeck function takes the linked list deck and converts it
 //into a vector for use by the shuffle function
@@ -45,4 +46,29 @@ void deck::shuffle() {
 	random_shuffle(deck.begin(), deck.end());
 	//reconstruct deck from vector
 	reconstructDeck(deck);
+}
+
+//Overloaded operator << displays the values stored in a card. 
+ostream& operator<< (ostream& ostr, const deck& deck) {
+	int lineMarker = 0;
+	node<card> cardNode = *deck.head;
+
+	if (deck.head == NULL) {
+		return ostr;
+	}
+
+	//while the list isnt empty
+	do {
+		//print the card
+		ostr << cardNode.nodeValue << " ";
+
+		//if the line reaches the maximum number of cards add a line
+		if (++lineMarker == MAXLINE) {
+			ostr << endl;
+			//reset counter
+			lineMarker = 0;
+		}
+	} while (cardNode.next != NULL);
+
+	return ostr;
 }
