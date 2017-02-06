@@ -17,13 +17,13 @@ int main() {
 	cout << "Printing the deck:\n";
 	cout << theDeck << endl << endl;
 
-	/*
+	
 	//Shuffle the deck
 	theDeck.shuffle();
 
 	cout << "Printing the shuffled deck:";
 	cout << theDeck << endl << endl;
-	*/
+	
 
 	system("pause");
 }

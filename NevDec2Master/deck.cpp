@@ -1,5 +1,6 @@
 #include <vector>
 #include <cstdlib>
+#include <time.h>
 #include <iostream>
 #include <algorithm>
 #include "deck.h"
@@ -27,45 +28,38 @@ deck::deck() {
 	}
 }
 
-//the deconstructDeck function takes the linked list deck and converts it
-//into a vector for use by the shuffle function
-vector<node<card>> deck::deconstructDeck() {
-	//vector of nodes to store deck for shuffle
-	vector<node<card>> vectorDeck;
-
-	//starting with head, add cards to back of vector
-	vectorDeck.push_back(*head);
-
-	//for loop iterates over all cards except for original head
-	while(head->next!=NULL)
-	{
-		//advance head through linked list
-		head = head->next;
-
-		//starting with head, add cards to back of vector
-		vectorDeck.push_back(*head);
-	}
-	return vectorDeck;
-}
-
-void deck::reconstructDeck(vector<node<card>> cards) {
-	for (unsigned int i=0; i<cards.size()-1; i++)
-	{
-		cards[i].next = &cards[i+1];
-	}
-	cards[cards.size()-1].next=NULL;
-}
-
-//The shuffle function uses the random_shuffle function from the
-//algorithms library to randomly re-order the deck of cards
 void deck::shuffle() {
-	//Create vector out of the deck
-	vector<node<card>> deck = deconstructDeck();
-	//call shuffle function on vector
-	random_shuffle(deck.begin(), deck.end());
-	//reconstruct deck from vector
-	reconstructDeck(deck);
+
+	//srand does random seeding based on curr time.  Troubles arise if srand is
+	//called more than once per second (number generated will be the same)
+	srand(time(NULL));
+
+	//Iterate shuffle process 1000 times
+	for (int j=0; j<1000; j++)
+	{
+	//Pick random integer i in range 0-51
+	int i = (rand() %51)+1; //random int in range 1-51
+	cout<<"i="<<i<<endl;
+
+	//Traverse list to node i
+	node<card> *currNode = head;
+	node<card> *prevNode = NULL;
+
+	//Advance i nodes through linked list
+	for (int k=0; k<i; k++)
+	{
+		prevNode = currNode;
+		currNode = currNode->next;
+	}
+	//delete node in original place
+	prevNode->next = currNode->next;
+
+	//copy node to beginning of list
+	currNode->next = head;
+	head = currNode;
+	}
 }
+
 
 //Overloaded operator << displays the values stored in a card.
 ostream& operator<< (ostream& ostr, const deck& deck) {
