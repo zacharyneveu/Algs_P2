@@ -1,3 +1,10 @@
+//Zachary Neveu | neveu.z@husky.neu.edu
+//Jake Dec | dec.j@husky.neu.edu
+//
+//This file contains the definition of the card class.  This class holds objects
+//with two data members: suit and value.  The implementations for the member
+//functions defined in this class can be found in card.cpp.
+
 #ifndef CARD_H
 #define CARD_H
 

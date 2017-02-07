@@ -1,4 +1,9 @@
-﻿// Contains methods for the card class
+//Zachary Neveu | neveu.z@husky.neu.edu
+//Jake Dec | dec.j@husky.neu.edu
+//
+//This file contains the implementations of the member functions in the card
+//class as defined in card.h.  This class is used to store two data members:
+//value and suit.
 
 #include "card.h"
 #include <iostream>
@@ -12,19 +17,13 @@ card::card(Suit suit, Value value) {
 	this->value = value;
 }
 
-/*//constructor for the card class
-card::card(const card &card) {
-	suit = card.suit;
-	value = card.value;
-}*/
-
 //Set the Suit value of this card
 void card::setSuit(Suit suit) {
 	this->suit = suit;
 }
 
 //Sets the face Value of this card
-void card::setValue(Value suit) {
+void card::setValue(Value value) {
 	this->value = value;
 }
 
