@@ -20,34 +20,36 @@ typedef enum suit {CLUB, DIAMOND, HEART, SPADE} Suit;
 
 //enumeration for the card face value
 typedef enum value {ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT,
-			NINE, TEN, JACK, QUEEN, KING} Value;
+                    NINE, TEN, JACK, QUEEN, KING
+                   } Value;
 
 //Definition of card class
-class card {
+class card
+{
 private:
-	Suit suit;
-	Value value;
+    Suit suit;
+    Value value;
 public:
-	//constructor for card
-	card(Suit suit, Value value);
+    //constructor for card
+    card(Suit suit, Value value);
 
-	//Set the Suit value of this card
-	void setSuit(Suit suit);
+    //Set the Suit value of this card
+    void setSuit(Suit suit);
 
-	//Sets the face Value of this card
-	void setValue(Value value);
+    //Sets the face Value of this card
+    void setValue(Value value);
 
-	//Returns the Suit of this card
-	Suit getSuit() const;
+    //Returns the Suit of this card
+    Suit getSuit() const;
 
-	//Return the face Value of this card
-	Value getValue() const;
+    //Return the face Value of this card
+    Value getValue() const;
 
-	//Returns a string representation of a card object
-	string toString() const;
+    //Returns a string representation of a card object
+    string toString() const;
 
-	//converts a card to a string representation, for printing to ostream
-	friend ostream& operator<< (ostream& ostr, const card &card);
+    //converts a card to a string representation, for printing to ostream
+    friend ostream& operator<< (ostream& ostr, const card &card);
 };
 
 #endif

@@ -10,21 +10,22 @@
 
 using namespace std;
 
-class deck {
+class deck
+{
 private:
-	node<card> *head;
+    node<card> *head;
 
 public:
-	//default constructor for deck
-	deck();
+    //default constructor for deck
+    deck();
 
-	//default destructor for deck
-	~deck();
+    //default destructor for deck
+    ~deck();
 
-	//The shuffle function picks a random card from the deck and places it on top.
-	//This process is repeated 1000 times.
-	void shuffle();
+    //The shuffle function picks a random card from the deck and places it on top.
+    //This process is repeated 1000 times.
+    void shuffle();
 
-	//Overloaded << operator that prints a deck to the output stream
-	friend ostream& operator<< (ostream& ostr, const deck &deck);
+    //Overloaded << operator that prints a deck to the output stream
+    friend ostream& operator<< (ostream& ostr, const deck &deck);
 };
