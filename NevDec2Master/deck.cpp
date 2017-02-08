@@ -50,8 +50,9 @@ deck::deck() {
 	}//ends outer for loop
 }//End of constructor
 
+//Destructor destroys linked list, freeing memory locations
 deck::~deck() {
-	//for iterating through list
+	//variables for iterating through list
 	node<card> * currentNode = this->head;
 	node<card> * nextNode = this->head;
 	int counter = 0;
@@ -79,8 +80,10 @@ deck::~deck() {
 	//debug statement to ensure that all the nodes were deleted
 	//cout << "Deleted " << counter << " nodes" << endl;
 	//system("pause");
-}
+} //End of destructor
 
+//The shuffle function picks a random card from the deck and places it on top.
+//This process is repeated 1000 times.
 void deck::shuffle() {
 	//srand does random seeding based on curr time.  Troubles arise if srand is
 	//called more than once per second (number generated will be the same)
@@ -106,8 +109,8 @@ void deck::shuffle() {
 		//copy node to beginning of list
 		currNode->next = head;
 		head = currNode;
-	}
-}
+	}//End of for loop
+}//End of shuffle function
 
 
 //Overloaded operator << displays the values stored in a card.

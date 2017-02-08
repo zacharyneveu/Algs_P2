@@ -22,6 +22,7 @@ typedef enum suit {CLUB, DIAMOND, HEART, SPADE} Suit;
 typedef enum value {ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT,
 			NINE, TEN, JACK, QUEEN, KING} Value;
 
+//Definition of card class
 class card {
 private:
 	Suit suit;
@@ -44,7 +45,7 @@ public:
 
 	//Returns a string representation of a card object
 	string toString() const;
-	
+
 	//converts a card to a string representation, for printing to ostream
 	friend ostream& operator<< (ostream& ostr, const card &card);
 };

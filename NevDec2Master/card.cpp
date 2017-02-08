@@ -37,7 +37,7 @@ Value card::getValue() const {
 	return value;
 }
 
-//Overloaded operator << displays the values stored in a card. 
+//Overloaded operator << displays the values stored in a card.
 ostream& operator<< (ostream& ostr, const card& card)
 {
 	ostr << card.toString();

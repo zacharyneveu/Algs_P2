@@ -3,6 +3,7 @@
 //
 //This file contains a simple main function which initializes a deck of cards
 //from the deck class, prints it, shuffles it, then prints it again.
+
 #include "card.h"//user defined card class
 #include "deck.h"//user defined deck class
 #include <iostream>//standard input and output
@@ -27,7 +28,7 @@ int main() {
 	//print the shuffled deck
 	cout << "Printing the shuffled deck:"<<endl;
 	cout << theDeck << endl << endl;
-	
+
 	//add a system pause to keep the visual studio terminal open
 	system("pause");
 }

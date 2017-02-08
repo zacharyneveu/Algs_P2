@@ -21,8 +21,8 @@ public:
 	//default destructor for deck
 	~deck();
 
-	//The shuffle function uses the random_shuffle function from the
-	//algorithms library to randomly re-order the deck of cards
+	//The shuffle function picks a random card from the deck and places it on top.
+	//This process is repeated 1000 times.
 	void shuffle();
 
 	//Overloaded << operator that prints a deck to the output stream
