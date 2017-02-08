@@ -27,8 +27,7 @@ int main() {
 	//print the shuffled deck
 	cout << "Printing the shuffled deck:"<<endl;
 	cout << theDeck << endl << endl;
-
-
+	
 	//add a system pause to keep the visual studio terminal open
 	system("pause");
 }

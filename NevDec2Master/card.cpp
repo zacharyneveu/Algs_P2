@@ -40,75 +40,12 @@ Value card::getValue() const {
 //Overloaded operator << displays the values stored in a card. 
 ostream& operator<< (ostream& ostr, const card& card)
 {
-	//convert the value to a string
-	switch (card.getValue()) {
-	case ACE:
-		ostr << "A";
-		break;
-	case TWO:
-		ostr << "2";
-		break;
-	case THREE:
-		ostr << "3";
-		break;
-	case FOUR:
-		ostr << "4";
-		break;
-	case FIVE:
-		ostr << "5";
-		break;
-	case SIX:
-		ostr << "6";
-		break;
-	case SEVEN:
-		ostr << "7";
-		break;
-	case EIGHT:
-		ostr << "8";
-		break;
-	case NINE:
-		ostr << "9";
-		break;
-	case TEN:
-		ostr << "10";
-		break;
-	case JACK:
-		ostr << "J";
-		break;
-	case QUEEN:
-		ostr << "Q";
-		break;
-	case KING:
-		ostr << "K";
-		break;
-	default:
-		//unreachable code
-		break;
-	}
-
-	//convert the suit to a string
-	switch (card.getSuit()) {
-	case CLUB:
-		ostr << "C";
-		break;
-	case HEART:
-		ostr << "H";
-		break;
-	case DIAMOND:
-		ostr << "D";
-		break;
-	case SPADE:
-		ostr << "S";
-		break;
-	default:
-		//unreachable code
-		break;
-	}
-
+	ostr << card.toString();
 	return ostr;
 }
 
-string card::toString() {
+//Returns a string representation of a card object
+string card::toString() const {
 	string result = "";
 
 	switch (this->value) {
@@ -159,16 +96,16 @@ string card::toString() {
 	//convert the suit to a string
 	switch (this->suit) {
 	case CLUB:
-		result += "♣";
+		result += "C";
 		break;
 	case HEART:
-		result += "♥";
+		result += "H";
 		break;
 	case DIAMOND:
-		result += "♦";
+		result += "D";
 		break;
 	case SPADE:
-		result += "♠";
+		result += "S";
 		break;
 	default:
 		//unreachable code

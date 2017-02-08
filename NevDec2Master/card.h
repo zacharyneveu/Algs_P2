@@ -29,7 +29,6 @@ private:
 public:
 	//constructor for card
 	card(Suit suit, Value value);
-	//card(const card &card);
 
 	//Set the Suit value of this card
 	void setSuit(Suit suit);
@@ -43,10 +42,9 @@ public:
 	//Return the face Value of this card
 	Value getValue() const;
 
-	string toString();
-
+	//Returns a string representation of a card object
+	string toString() const;
 	
-
 	//converts a card to a string representation, for printing to ostream
 	friend ostream& operator<< (ostream& ostr, const card &card);
 };

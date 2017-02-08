@@ -12,6 +12,7 @@
 #include "card.h" //Definition of card class
 #include "d_node.h" //Definition of linked list template class
 
+#define MAXLINEWIDTH 13 //defines the maximum cards that will be printed on line
 
 //Constructor initializes deck with all cards in order
 deck::deck() {
@@ -22,10 +23,9 @@ deck::deck() {
 	node<card> * current = NULL;
 
 	//Initialize the first card in the deck
-	card * tempCard = new card((suit)0, (value)0);
-
+	card firstCard((suit)0, (value)0);
 	//Initialize the first node of the list with NULL next pointer
-	head = new node<card>(*tempCard, NULL);
+	head = new node<card>(firstCard, NULL);
 
 	//Set current node to head
 	current = head;
@@ -38,9 +38,9 @@ deck::deck() {
 			//node has already been created.
 			if (!(i == 0 && j == 0)) {
 				//Create card to store in node with suit of i and value of j
-				tempCard = new card((suit)(i), (value)(j));
+				card tempCard((suit)(i), (value)(j));
 				//Create a new node with the new card inside
-				node<card> * temp = new node<card>(*tempCard, NULL);
+				node<card> * temp = new node<card>(tempCard, NULL);
 				//link new node into list
 				current->next = temp;
 				//Advance current to the new node
@@ -50,34 +50,62 @@ deck::deck() {
 	}//ends outer for loop
 }//End of constructor
 
-void deck::shuffle() {
+deck::~deck() {
+	//for iterating through list
+	node<card> * currentNode = this->head;
+	node<card> * nextNode = this->head;
+	int counter = 0;
 
+	//if the deck is empty, return
+	if (this->head == NULL) {
+		return;
+	}
+
+	//while the linked list isn't empty
+	do {
+		//get the next node in the list
+		nextNode = currentNode->next;
+
+		//delete the node pointer
+		delete currentNode;
+
+		//add to the counter (debug)
+		counter++;
+
+		//set the current node to the next node
+		currentNode = nextNode;
+	} while (nextNode != NULL);
+
+	//debug statement to ensure that all the nodes were deleted
+	//cout << "Deleted " << counter << " nodes" << endl;
+	//system("pause");
+}
+
+void deck::shuffle() {
 	//srand does random seeding based on curr time.  Troubles arise if srand is
 	//called more than once per second (number generated will be the same)
 	srand(time(NULL));
 
 	//Iterate shuffle process 1000 times
-	for (int j=0; j<1000; j++)
-	{
-	//Pick random integer i in range 0-51
-	int i = (rand() %51)+1; //random int in range 1-51
+	for (int j=0; j<1000; j++)	{
+		//Pick random integer i in range 0-51
+		int i = (rand() %51)+1; //random int in range 1-51
 
-	//Traverse list to node i
-	node<card> *currNode = head;
-	node<card> *prevNode = NULL;
+		//Traverse list to node i
+		node<card> *currNode = head;
+		node<card> *prevNode = NULL;
 
-	//Advance i nodes through linked list
-	for (int k=0; k<i; k++)
-	{
-		prevNode = currNode;
-		currNode = currNode->next;
-	}
-	//delete node in original place
-	prevNode->next = currNode->next;
+		//Advance i nodes through linked list
+		for (int k=0; k<i; k++) {
+			prevNode = currNode;
+			currNode = currNode->next;
+		}
+		//delete node in original place
+		prevNode->next = currNode->next;
 
-	//copy node to beginning of list
-	currNode->next = head;
-	head = currNode;
+		//copy node to beginning of list
+		currNode->next = head;
+		head = currNode;
 	}
 }
 
@@ -91,20 +119,23 @@ ostream& operator<< (ostream& ostr, const deck& deck) {
 		return ostr;
 	}
 
-	//while the list isnt empty
+	//while the list isn't empty
 	do {
 		//print the card
 		ostr << cardNode.nodeValue << " ";
+
+		//Move to the next node.
 		cardNode = *cardNode.next;
 
-		//if the line reaches the maximum number of cards add a line
-		if (++lineMarker == 13) {
+		//if the line reaches the maximum number of cards add a newline
+		if (++lineMarker == MAXLINEWIDTH) {
 			ostr << endl;
 			//reset counter
 			lineMarker = 0;
 		}
 	} while (cardNode.next != NULL);
 
+	//add to the output stream
 	ostr << cardNode.nodeValue << endl;
 
 	return ostr;

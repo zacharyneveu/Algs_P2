@@ -15,10 +15,16 @@ private:
 	node<card> *head;
 
 public:
+	//default constructor for deck
 	deck();
+
+	//default destructor for deck
+	~deck();
 
 	//The shuffle function uses the random_shuffle function from the
 	//algorithms library to randomly re-order the deck of cards
 	void shuffle();
+
+	//Overloaded << operator that prints a deck to the output stream
 	friend ostream& operator<< (ostream& ostr, const deck &deck);
 };
