@@ -18,6 +18,13 @@ card::card(Suit suit, Value value)
     this->value = value;
 }
 
+//Copy Constructor
+card::card(card *original)
+{
+	this->suit = original->suit;
+	this->value = original->value;
+}
+
 //Set the Suit value of this card
 void card::setSuit(Suit suit)
 {

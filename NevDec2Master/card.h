@@ -33,6 +33,9 @@ public:
     //constructor for card
     card(Suit suit, Value value);
 
+	//Copy Constructor
+	card(card *original);
+
     //Set the Suit value of this card
     void setSuit(Suit suit);
 
