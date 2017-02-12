@@ -49,6 +49,14 @@ Value card::getValue() const
     return value;
 }
 
+//Overloaded = operator assigns one card to another card
+card card::operator= (const card &rhs)
+{
+	this->value = rhs.value;
+	this->suit = rhs.suit;
+	return this;
+}
+
 //Overloaded operator << displays the values stored in a card.
 ostream& operator<< (ostream& ostr, const card& card)
 {

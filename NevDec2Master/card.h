@@ -51,6 +51,9 @@ public:
     //Returns a string representation of a card object
     string toString() const;
 
+	//Overloaded = operator assigns one card to another card
+	card operator= (const card &rhs);
+
     //converts a card to a string representation, for printing to ostream
     friend ostream& operator<< (ostream& ostr, const card &card);
 };
