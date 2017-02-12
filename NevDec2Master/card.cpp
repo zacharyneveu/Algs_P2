@@ -50,6 +50,7 @@ Value card::getValue() const
 }
 
 //Overloaded = operator assigns one card to another card
+//= operator must be overloaded as member function
 card card::operator= (const card &rhs)
 {
 	this->value = rhs.value;

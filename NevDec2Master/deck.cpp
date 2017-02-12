@@ -124,6 +124,14 @@ void deck::shuffle()
     }//End of for loop
 }//End of shuffle function
 
+//Deal function returns the top card of the deck and removes it
+node<card> deck::deal()
+{
+	node<card> *temp = head;
+	head = head->next;
+	return temp->nodeValue;
+}
+
 
 //Overloaded operator << displays the values stored in a card.
 ostream& operator<< (ostream& ostr, const deck& deck)

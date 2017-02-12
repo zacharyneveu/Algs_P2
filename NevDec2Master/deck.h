@@ -26,6 +26,9 @@ public:
     //This process is repeated 1000 times.
     void shuffle();
 
+	//Deal function returns the top card of the deck and removes it
+	node<card> deal();
+
     //Overloaded << operator that prints a deck to the output stream
     friend ostream& operator<< (ostream& ostr, const deck &deck);
 };
