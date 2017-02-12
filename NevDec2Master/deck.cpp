@@ -19,9 +19,10 @@ deck::deck()
 {
     //Begin function with empty list
     head = NULL;
+	bottom = NULL;
 
     //Create pointer to current card
-    node<card> * current = NULL;
+    node<card> *current = NULL;
 
     //Initialize the first card in the deck
     card firstCard((suit)0, (value)0);
@@ -44,11 +45,13 @@ deck::deck()
                 //Create card to store in node with suit of i and value of j
                 card tempCard((suit)(i), (value)(j));
                 //Create a new node with the new card inside
-                node<card> * temp = new node<card>(tempCard, NULL);
+                node<card> *temp = new node<card>(tempCard, NULL);
                 //link new node into list
                 current->next = temp;
                 //Advance current to the new node
                 current = temp;
+				//bottom will always be latest created
+				bottom = current;
             }//ends if statement
         }//ends inner for loop
     }//ends outer for loop
@@ -122,6 +125,15 @@ void deck::shuffle()
         currNode->next = head;
         head = currNode;
     }//End of for loop
+
+	//Traverse shuffled list to the end to get bottom pointer.  While this runs
+	//in linear time, it does not noticeably effect run time of the program.
+	node<card> *currNode = NULL;
+	while(head->next!=NULL)
+	{
+		currNode = currNode->next;
+	}
+	bottom = currNode;
 }//End of shuffle function
 
 //Deal function returns the top card of the deck and removes it
@@ -132,6 +144,14 @@ node<card> deck::deal()
 	return temp->nodeValue;
 }
 
+//Replace function is passed a card and returns it to the bottom of the
+//deck.
+void deck::replace(node<card> *newBottom)
+{
+	//insert new card after bottom
+	bottom->next = newBottom;
+	newBottom->next = NULL;
+}
 
 //Overloaded operator << displays the values stored in a card.
 ostream& operator<< (ostream& ostr, const deck& deck)

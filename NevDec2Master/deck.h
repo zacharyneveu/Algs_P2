@@ -13,7 +13,11 @@ using namespace std;
 class deck
 {
 private:
+	//Head holds top card of deck
     node<card> *head;
+
+	//bottom holds bottom card of deck
+	node<card> *bottom;
 
 public:
     //default constructor for deck
@@ -28,6 +32,10 @@ public:
 
 	//Deal function returns the top card of the deck and removes it
 	node<card> deal();
+
+	//Replace function is passed a card and returns it to the bottom of the
+	//deck.
+	void replace(node<card> *newBottom);
 
     //Overloaded << operator that prints a deck to the output stream
     friend ostream& operator<< (ostream& ostr, const deck &deck);
