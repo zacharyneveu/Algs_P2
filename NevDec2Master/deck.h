@@ -23,6 +23,9 @@ public:
     //default constructor for deck
     deck();
 
+	//Constructor to manually create pile of cards as deck
+	deck(node<card> *head);
+
     //default destructor for deck
     ~deck();
 
@@ -36,6 +39,10 @@ public:
 	//Replace function is passed a card and returns it to the bottom of the
 	//deck.
 	void replace(node<card> *newBottom);
+
+	//Add at top is passed a pointer to a card, and adds the card to the top
+	//of the deck, allocating memory for it.
+	void addTop(node<card> *newTop);
 
     //Overloaded << operator that prints a deck to the output stream
     friend ostream& operator<< (ostream& ostr, const deck &deck);

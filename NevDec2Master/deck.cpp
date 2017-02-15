@@ -57,6 +57,16 @@ deck::deck()
     }//ends outer for loop
 }//End of constructor
 
+
+//Constructor to manually create pile of cards as deck
+deck::deck(node<card> * head)
+{
+	this->head = head;
+	this->head->next = NULL;
+	this->bottom = head;
+	this->bottom->next = NULL;
+}
+
 //Destructor destroys linked list, freeing memory locations
 deck::~deck()
 {
@@ -128,8 +138,8 @@ void deck::shuffle()
 
 	//Traverse shuffled list to the end to get bottom pointer.  While this runs
 	//in linear time, it does not noticeably effect run time of the program.
-	node<card> *currNode = NULL;
-	while(head->next!=NULL)
+	node<card> *currNode = head;
+	while(currNode->next!=NULL)
 	{
 		currNode = currNode->next;
 	}
@@ -137,20 +147,32 @@ void deck::shuffle()
 }//End of shuffle function
 
 //Deal function returns the top card of the deck and removes it
+//Returns node with card inside
 node<card> deck::deal()
 {
 	node<card> *temp = head;
 	head = head->next;
-	return temp->nodeValue;
+	return *temp;
 }
 
-//Replace function is passed a card and returns it to the bottom of the
+//Replace function is passed a node<card> and returns it to the bottom of the
 //deck.
 void deck::replace(node<card> *newBottom)
 {
 	//insert new card after bottom
 	bottom->next = newBottom;
 	newBottom->next = NULL;
+}
+
+//Add at top is passed a pointer to a card, and adds the card to the top
+//of the deck, allocating memory for it.
+void deck::addTop(node<card> *newTop)
+{
+	card newCard();
+	node<card> *toAdd = new node<card>();
+	*toAdd = *newTop;
+	toAdd->next = head;
+	head = toAdd;
 }
 
 //Overloaded operator << displays the values stored in a card.
