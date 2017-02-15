@@ -168,8 +168,8 @@ void deck::replace(node<card> *newBottom)
 //of the deck, allocating memory for it.
 void deck::addTop(node<card> *newTop)
 {
-	card newCard();
-	node<card> *toAdd = new node<card>();
+	card newCard((suit)0, (value)0);
+	node<card> *toAdd = new node<card>(newCard,NULL);
 	*toAdd = *newTop;
 	toAdd->next = head;
 	head = toAdd;
