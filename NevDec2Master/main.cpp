@@ -8,6 +8,8 @@
 #include "deck.h"//user defined deck class
 #include <iostream>//standard input and output
 
+#define PILESIZE 24 //Define size of pile of cards chosen from deck
+
 void playFlip(deck PassedDeck);
 
 int main()
@@ -16,7 +18,10 @@ int main()
 	deck playDeck;
 
 	//Play game function
-	playFlip(playDeck);
+	//playFlip(playDeck);
+
+	//debugging line
+	cout<<"Back in the main function"<<endl;
 
     //add a system pause to keep the visual studio terminal open
     system("pause");
@@ -32,12 +37,13 @@ int main()
 void playFlip(deck PassedDeck)
 {
 	PassedDeck.shuffle(); //Instructions said to shuffle three times?
-	PassedDeck.shuffle(); //Deck in random order after once
-	PassedDeck.shuffle();
+	//PassedDeck.shuffle(); //Deck in random order after once
+	//PassedDeck.shuffle();
+
 	node<card> firstCard = PassedDeck.deal();
 	deck choosePile(&firstCard);//create new "deck" to store pile of 24 cards.
-	node<card> newCard(card((suit)1,(value)1), NULL);//Random values needed to construct
-	for (int i=1; i<24; i++)//Start at one because top card already passed
+	node<card> newCard(&firstCard.nodeValue);//Random values needed to construct
+	for (int i=1; i<PILESIZE; i++)//Start at one because top card already passed
 	{
 		newCard = PassedDeck.deal();//Remove card from main deck
 		choosePile.addTop(&newCard);//add card to pile

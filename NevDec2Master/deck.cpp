@@ -87,6 +87,9 @@ deck::~deck()
         //get the next node in the list
         nextNode = currentNode->next;
 
+		//debugging
+		cout<<"Node Deleted: "<<counter<<", "<<currentNode->nodeValue<<endl;
+
         //delete the node pointer
         delete currentNode;
 
@@ -96,7 +99,7 @@ deck::~deck()
         //set the current node to the next node
         currentNode = nextNode;
     }
-    while (nextNode != NULL);
+    while (currentNode->next != NULL);
 
     //debug statement to ensure that all the nodes were deleted
     //cout << "Deleted " << counter << " nodes" << endl;
@@ -152,6 +155,7 @@ node<card> deck::deal()
 {
 	node<card> *temp = head;
 	head = head->next;
+	temp->next = NULL; //make sure temp is unlinked
 	return *temp;
 }
 
@@ -168,9 +172,7 @@ void deck::replace(node<card> *newBottom)
 //of the deck, allocating memory for it.
 void deck::addTop(node<card> *newTop)
 {
-	card newCard((suit)0, (value)0);
-	node<card> *toAdd = new node<card>(newCard,NULL);
-	*toAdd = *newTop;
+	node<card> *toAdd = new node<card>(newTop->nodeValue);
 	toAdd->next = head;
 	head = toAdd;
 }
