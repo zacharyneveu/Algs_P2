@@ -18,7 +18,7 @@ int main()
 	playFlip();
 
 	//debugging line
-	cout<<"Back in the main function"<<endl;
+	//cout<<"Back in the main function"<<endl;
 
     //add a system pause to keep the visual studio terminal open
     system("pause");
@@ -44,22 +44,33 @@ void playFlip()
 	cout<<choosePile<<endl;
 	char playerStatus;//char used to quit if player enters q
 	int points = 0;//integer to store total points
+	bool checked[PILESIZE];
+	for (int i=0; i<PILESIZE; i++)
+	{
+		checked[i]=false;
+	}
 	do
 	{
 		int cardNumber;//int to store desired card to flip
 		cout << "Enter a number between 1 and " << PILESIZE << " to flip that card: ";
 		cin >> cardNumber;//get desired card number to flip
-		if (cardNumber <= PILESIZE) //trigger if card is in range
+		//trigger if card is in range
+		if (cardNumber <= PILESIZE && checked[cardNumber]==false)
 		{
-			//pointer to the desired card
+			checked[cardNumber] = true; //mark card as flipped
+			//create pointer to the desired card
 			node<card> *pointCard = choosePile.traverse(cardNumber);
 			//update points- pass by reference and change directly
 			pointCard->nodeValue.getPoints(points);
 			cout << endl << "Current Points: " << points << endl;//print points
 		}
-		else //triggger if card is out of range
+		else if(cardNumber>PILESIZE) //triggger if card is out of range
 		{
 			cout << "That card is out of range" << endl;
+		}
+		else if(checked[cardNumber]==true)
+		{
+			cout<<"You've already flipped that card"<<endl;
 		}
 		cout << "Press q to quit, or any other key to continue" << endl;
 		cin >> playerStatus;
