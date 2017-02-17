@@ -18,7 +18,7 @@ int main()
 	deck playDeck;
 
 	//Play game function
-	//playFlip(playDeck);
+	playFlip(playDeck);
 
 	//debugging line
 	cout<<"Back in the main function"<<endl;
@@ -50,4 +50,11 @@ void playFlip(deck PassedDeck)
 	}
 	cout<<"Printing drawn pile"<<endl;
 	cout<<choosePile<<endl;
+	
+	char playerStatus;
+	do
+	{
+		cout<<"Enter a number between 1 and "<<PILESIZE<<"to flip that card"<<endl;
+
+
 }

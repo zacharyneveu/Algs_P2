@@ -75,31 +75,37 @@ deck::~deck()
     node<card> * nextNode = this->head;
     int counter = 0;
 
-    //if the deck is empty, return
-    if (this->head == NULL)
-    {
-        return;
-    }
 
-    //while the linked list isn't empty
-    do
-    {
-        //get the next node in the list
-        nextNode = currentNode->next;
+	//if the linked list isn't empty
+	if(this->head!=NULL)
+	{
+		do
+		{
+			//get the next node in the list
+			nextNode = currentNode->next;
 
-		//debugging
-		cout<<"Node Deleted: "<<counter<<", "<<currentNode->nodeValue<<endl;
+			//debugging
+			cout<<"Node Deleted: "<<counter<<", "<<currentNode->nodeValue<<endl;
+			cout<<currentNode->next<<endl;
 
-        //delete the node pointer
-        delete currentNode;
+			//delete the node pointer
+			delete currentNode;
 
-        //add to the counter (debug)
-        counter++;
+			//add to the counter (debug)
+			counter++;
 
-        //set the current node to the next node
-        currentNode = nextNode;
-    }
-    while (currentNode->next != NULL);
+			//set the current node to the next node
+			currentNode = nextNode;
+		}
+		while (currentNode != NULL);
+		//delete currentNode;
+		//cout<<"Deleted final node"<<endl;
+	}
+
+	else //if list is empty
+	{
+		return;
+	}
 
     //debug statement to ensure that all the nodes were deleted
     //cout << "Deleted " << counter << " nodes" << endl;
