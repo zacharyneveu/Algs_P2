@@ -10,12 +10,15 @@
 
 #define PILESIZE 24 //Define size of pile of cards chosen from deck
 
-void playFlip();
+void playFlip(deck PassedDeck);
 
 int main()
 {
+	//Initialize a deck to play with
+	deck playDeck;
+
 	//Play game function
-	playFlip();
+	playFlip(playDeck);
 
 	//debugging line
 	cout<<"Back in the main function"<<endl;
@@ -31,37 +34,44 @@ int main()
 //3. Player can either select a card to turn over or end the game.  points
 //tally of points kept throughout.  Game should remember which cards have
 //been flipped.
-void playFlip()
+void playFlip(deck PassedDeck)
 {
-	deck playDeck;
-	deck choosePile(false);
+	PassedDeck.shuffle(); //Instructions said to shuffle three times?
+	//PassedDeck.shuffle(); //Deck in random order after once
+	//PassedDeck.shuffle();
 
-	for (int i=0; i<PILESIZE; i++)//Start at one because top card already passed
+	node<card> firstCard = PassedDeck.deal();
+	deck choosePile(&firstCard);//create new "deck" to store pile of 24 cards.
+	node<card> newCard(&firstCard.nodeValue);//Random values needed to construct
+	for (int i=1; i<PILESIZE; i++)//Start at one because top card already passed
 	{
-		choosePile.replace(playDeck.deal());//Remove card from main deck
+		newCard = PassedDeck.deal();//Remove card from main deck
+		choosePile.addTop(&newCard);//add card to pile
 	}
 	cout<<"Printing drawn pile"<<endl;
 	cout<<choosePile<<endl;
+
 	char playerStatus;//char used to quit if player enters q
-	int points = 0;//integer to store total points
+	int points=0;//integer to store total points
 	do
 	{
 		int cardNumber;//int to store desired card to flip
-		cout << "Enter a number between 1 and " << PILESIZE << " to flip that card: ";
-		cin >> cardNumber;//get desired card number to flip
-		if (cardNumber <= PILESIZE) //trigger if card is in range
+		cout<<"Enter a number between 1 and "<<PILESIZE<<"to flip that card: ";
+		cin>>cardNumber;//get desired card number to flip
+		if(cardNumber<=PILESIZE) //trigger if card is in range
 		{
 			//pointer to the desired card
-			node<card> *pointCard = choosePile.traverse(cardNumber);
+			node<card> *pointCard = PassedDeck.traverse(cardNumber);
 			//update points- pass by reference and change directly
 			pointCard->nodeValue.getPoints(points);
-			cout << endl << "Current Points: " << points << endl;//print points
+			cout<<endl<<"Current Points: "<<points<<endl;//print points
 		}
 		else //triggger if card is out of range
 		{
-			cout << "That card is out of range" << endl;
+			cout<<"That card is out of range"<<endl;
 		}
-		cout << "Press q to quit, or any other key to continue" << endl;
-		cin >> playerStatus;
-	} while (playerStatus != 'q');
+		cout<<"Press q to quit, or any other key to continue"<<endl;
+		cin>>playerStatus;
+	}
+	while(playerStatus!='q');
 }
