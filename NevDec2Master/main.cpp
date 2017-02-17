@@ -14,11 +14,11 @@ void playFlip();
 
 int main()
 {
-	//Play game function
-	playFlip();
+    //Play game function
+    playFlip();
 
-	//debugging line
-	//cout<<"Back in the main function"<<endl;
+    //debugging line
+    //cout<<"Back in the main function"<<endl;
 
     //add a system pause to keep the visual studio terminal open
     system("pause");
@@ -33,71 +33,77 @@ int main()
 //been flipped.
 void playFlip()
 {
-	deck playDeck;
-	deck choosePile(false);
+    deck playDeck;
+    deck choosePile(false);
 
-	cout << "Printing unshuffled deck" << endl;
-	cout << playDeck << endl;
+    cout << "Printing unshuffled deck" << endl;
+    cout << playDeck << endl;
 
-	playDeck.shuffle();
-	playDeck.shuffle();
-	playDeck.shuffle();
+    playDeck.shuffle();
+    playDeck.shuffle();
+    playDeck.shuffle();
 
-	cout << "Printing shuffled deck" << endl;
-	cout << playDeck << endl;
-	
-
-	//Draw 24 cards from the top of the deck and place in choosePile
-	for (int i=0; i<PILESIZE; i++)
-	{
-		choosePile.replace(playDeck.deal());
-	}
-
-	cout<<"Printing drawn pile"<<endl;
-	cout<<choosePile<<endl;
+    cout << "Printing shuffled deck" << endl;
+    cout << playDeck << endl;
 
 
-	int input; //for user input
-	int points = 0; // game score
-	bool checked[PILESIZE]; //array to check for flips on same card
+    //Draw 24 cards from the top of the deck and place in choosePile
+    for (int i = 0; i < PILESIZE; i++)
+    {
+        choosePile.replace(playDeck.deal());
+    }
 
-	//init array
-	for (int i=0; i<PILESIZE; i++)
-	{
-		checked[i]=false;
-	}
+    cout << "Printing drawn pile" << endl;
+    cout << choosePile << endl;
 
-	//main game loop
-	do
-	{
-		cout << endl << "Current Points: " << points << endl;//print points
-		cout << "Enter a number between 1 and " << PILESIZE << "to flip that card, 0 to quit: ";
-		cin >> input;//get desired card number to flip
 
-		//if quit condition
-		if (input <= 0) {
-			printf("Game ending. Final score is: %d\n", points);
-			return;
-		}
-		//if card is in range
-		else if (input <= PILESIZE) 
-			//if the card has not been flipped
-			if (!checked[input - 1]) {
-				//mark card as flipped
-				checked[input - 1] = true; 
-				//get the card (node)
-				node<card> *pointCard = choosePile.traverse(input - 1);
-				//update points- pass by reference and change directly
-				pointCard->nodeValue.getPoints(points);
-			}
-			//the card has already been flipeped
-			else {
-				cout << "You already flipped that card!." << endl;
-			}
-		//invalid integer input (out of range)
-		else 
-		{
-			cout << "That card is invalid." << endl;
-		}
-	} while (1);
+    int input; //for user input
+    int points = 0; // game score
+    bool checked[PILESIZE]; //array to check for flips on same card
+
+    //init array
+    for (int i = 0; i < PILESIZE; i++)
+    {
+        checked[i] = false;
+    }
+
+    //main game loop
+    do
+    {
+        cout << endl << "Current Points: " << points << endl;//print points
+        cout << "Enter a number between 1 and " << PILESIZE <<
+             "to flip that card, 0 to quit: ";
+        cin >> input;//get desired card number to flip
+
+        //if quit condition
+        if (input <= 0)
+        {
+            printf("Game ending. Final score is: %d\n", points);
+            return;
+        }
+        //if card is in range
+        else if (input <= PILESIZE)
+
+            //if the card has not been flipped
+            if (!checked[input - 1])
+            {
+                //mark card as flipped
+                checked[input - 1] = true;
+                //get the card (node)
+                node<card> *pointCard = choosePile.traverse(input - 1);
+                //update points- pass by reference and change directly
+                pointCard->nodeValue.getPoints(points);
+            }
+        //the card has already been flipeped
+            else
+            {
+                cout << "You already flipped that card!." << endl;
+            }
+        //invalid integer input (out of range)
+        else
+        {
+            cout << "That card is invalid." << endl;
+        }
+    }
+    while (1);
 }

@@ -21,8 +21,8 @@ card::card(Suit suit, Value value)
 //Copy Constructor
 card::card(card *original)
 {
-	this->suit = original->suit;
-	this->value = original->value;
+    this->suit = original->suit;
+    this->value = original->value;
 }
 
 //Set the Suit value of this card
@@ -53,9 +53,9 @@ Value card::getValue() const
 //= operator must be overloaded as member function
 card card::operator= (const card &rhs)
 {
-	this->value = rhs.value;
-	this->suit = rhs.suit;
-	return this;
+    this->value = rhs.value;
+    this->suit = rhs.suit;
+    return this;
 }
 
 //Overloaded operator << displays the values stored in a card.
@@ -159,36 +159,43 @@ string card::toString() const
 //getPoints updates the points the user has
 void card::getPoints(int &points)
 {
-	switch (this->value)
-	{
-	case ACE:
-		points += 10; //ace+=10 points
-		break;
-	case TWO:
-	case THREE:
-	case FOUR:
-	case FIVE:
-	case SIX:
-		//fall through
-		points = 0;
-		break;
-	case SEVEN:
-		points /= 2;
-		break;
-	case EIGHT: 
-	case NINE:	
-	case TEN:
-		//fall through
-		break;
-	case JACK:
-	case QUEEN:
-	case KING:
-		//fall through
-		points += 5;
-		break;
-	}
-	if (this->suit == HEART) {
-		points += 1;
-	}
-	return;
+    switch (this->value)
+    {
+    case ACE:
+        points += 10; //ace+=10 points
+        break;
+
+    case TWO:
+    case THREE:
+    case FOUR:
+    case FIVE:
+    case SIX:
+        //fall through
+        points = 0;
+        break;
+
+    case SEVEN:
+        points /= 2;
+        break;
+
+    case EIGHT:
+    case NINE:
+    case TEN:
+        //fall through
+        break;
+
+    case JACK:
+    case QUEEN:
+    case KING:
+        //fall through
+        points += 5;
+        break;
+    }
+
+    if (this->suit == HEART)
+    {
+        points += 1;
+    }
+
+    return;
 }

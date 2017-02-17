@@ -33,8 +33,8 @@ public:
     //constructor for card
     card(Suit suit, Value value);
 
-	//Copy Constructor
-	card(card *original);
+    //Copy Constructor
+    card(card *original);
 
     //Set the Suit value of this card
     void setSuit(Suit suit);
@@ -51,11 +51,11 @@ public:
     //Returns a string representation of a card object
     string toString() const;
 
-	//Overloaded = operator assigns one card to another card
-	card operator= (const card &rhs);
+    //Overloaded = operator assigns one card to another card
+    card operator= (const card &rhs);
 
-	//getPoints updates the points the user has
-	void card::getPoints(int &points);
+    //getPoints updates the points the user has
+    void card::getPoints(int &points);
 
     //converts a card to a string representation, for printing to ostream
     friend ostream& operator<< (ostream& ostr, const card &card);

@@ -13,14 +13,14 @@ using namespace std;
 class deck
 {
 private:
-	//Head holds top card of deck
+    //Head holds top card of deck
     node<card> *head;
 public:
     //default constructor for deck
     deck();
 
-	//Constructor to manually create pile of cards as deck
-	deck(bool fulldeck);
+    //Constructor to manually create pile of cards as deck
+    deck(bool fulldeck);
 
     //default destructor for deck
     ~deck();
@@ -29,20 +29,20 @@ public:
     //This process is repeated 1000 times.
     void shuffle();
 
-	//Deal function returns the top card of the deck and removes it
-	node<card> * deal();
+    //Deal function returns the top card of the deck and removes it
+    node<card> * deal();
 
-	//Replace function is passed a card and returns it to the bottom of the
-	//deck.
-	void replace(node<card> *newBottom);
+    //Replace function is passed a card and returns it to the bottom of the
+    //deck.
+    void replace(node<card> *newBottom);
 
-	//Add at top is passed a pointer to a card, and adds the card to the top
-	//of the deck, allocating memory for it.
-	void addTop(node<card> *newTop);	
-	
-	//Traverse function moves through the deck by a specified number of cards and
-	//returns a pointer to the card at that position.
-	node<card>* traverse(int cardNumber);
+    //Add at top is passed a pointer to a card, and adds the card to the top
+    //of the deck, allocating memory for it.
+    void addTop(node<card> *newTop);
+
+    //Traverse function moves through the deck by a specified number of cards and
+    //returns a pointer to the card at that position.
+    node<card>* traverse(int cardNumber);
 
 
     //Overloaded << operator that prints a deck to the output stream
