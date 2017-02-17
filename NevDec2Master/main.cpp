@@ -42,4 +42,26 @@ void playFlip()
 	}
 	cout<<"Printing drawn pile"<<endl;
 	cout<<choosePile<<endl;
+	char playerStatus;//char used to quit if player enters q
+	int points = 0;//integer to store total points
+	do
+	{
+		int cardNumber;//int to store desired card to flip
+		cout << "Enter a number between 1 and " << PILESIZE << "to flip that card: ";
+		cin >> cardNumber;//get desired card number to flip
+		if (cardNumber <= PILESIZE) //trigger if card is in range
+		{
+			//pointer to the desired card
+			node<card> *pointCard = choosePile.traverse(cardNumber);
+			//update points- pass by reference and change directly
+			pointCard->nodeValue.getPoints(points);
+			cout << endl << "Current Points: " << points << endl;//print points
+		}
+		else //triggger if card is out of range
+		{
+			cout << "That card is out of range" << endl;
+		}
+		cout << "Press q to quit, or any other key to continue" << endl;
+		cin >> playerStatus;
+	} while (playerStatus != 'q');
 }
