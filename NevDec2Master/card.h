@@ -54,6 +54,9 @@ public:
 	//Overloaded = operator assigns one card to another card
 	card operator= (const card &rhs);
 
+	//getPoints updates the points the user has
+	void card::getPoints(int &points);
+
     //converts a card to a string representation, for printing to ostream
     friend ostream& operator<< (ostream& ostr, const card &card);
 };

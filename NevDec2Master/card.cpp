@@ -155,3 +155,45 @@ string card::toString() const
 
     return result;
 }
+
+//getPoints updates the points the user has
+void card::getPoints(int &points)
+{
+	switch (this->value)
+	{
+	case ACE:
+		points += 10; //ace+=10 points
+		break;
+	case TWO:
+		points = 0;
+		break;
+	case THREE:
+		points = 0;
+		break;
+	case FOUR:
+		points = 0;
+		break;
+	case FIVE:
+		points = 0;
+		break;
+	case SIX:
+		points = 0;
+		break;
+	case SEVEN:
+		points /= 2;
+		break;
+	case EIGHT:	break;
+	case NINE:	break;
+	case TEN:	break;
+	case JACK:
+		points += 5;
+		break;
+	case QUEEN:
+		points += 5;
+		break;
+	case KING:
+		points += 5;
+		break;
+	}
+
+}

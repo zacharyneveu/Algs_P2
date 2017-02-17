@@ -224,3 +224,15 @@ ostream& operator<< (ostream& ostr, const deck& deck)
 
     return ostr;
 }//End of overloaded operator <<
+
+ //Traverse function moves through the deck by a specified number of cards and
+ //returns a pointer to the card at that position.
+node<card>* deck::traverse(int cardNumber)
+{
+	node<card> *currNode = this->head;
+	for (int i = 0; i<cardNumber; i++)
+	{
+		currNode = currNode->next;
+	}
+	return currNode;
+}
