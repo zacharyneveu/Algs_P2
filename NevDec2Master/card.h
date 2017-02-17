@@ -56,6 +56,9 @@ public:
 
     //converts a card to a string representation, for printing to ostream
     friend ostream& operator<< (ostream& ostr, const card &card);
+
+	//getPoints updates the points the user has
+	void getPoints(int &points);
 };
 
 #endif

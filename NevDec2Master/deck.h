@@ -44,6 +44,10 @@ public:
 	//of the deck, allocating memory for it.
 	void addTop(node<card> *newTop);
 
+	//Traverse function moves through the deck by a specified number of cards and
+	//returns a pointer to the card at that position.
+	node<card>* traverse(int cardNumber);
+
     //Overloaded << operator that prints a deck to the output stream
     friend ostream& operator<< (ostream& ostr, const deck &deck);
 };
