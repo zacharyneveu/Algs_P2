@@ -36,43 +36,68 @@ void playFlip()
 	deck playDeck;
 	deck choosePile(false);
 
-	for (int i=0; i<PILESIZE; i++)//Start at one because top card already passed
+	cout << "Printing unshuffled deck" << endl;
+	cout << playDeck << endl;
+
+	playDeck.shuffle();
+	playDeck.shuffle();
+	playDeck.shuffle();
+
+	cout << "Printing shuffled deck" << endl;
+	cout << playDeck << endl;
+	
+
+	//Draw 24 cards from the top of the deck and place in choosePile
+	for (int i=0; i<PILESIZE; i++)
 	{
-		choosePile.replace(playDeck.deal());//Remove card from main deck
+		choosePile.replace(playDeck.deal());
 	}
+
 	cout<<"Printing drawn pile"<<endl;
 	cout<<choosePile<<endl;
-	char playerStatus;//char used to quit if player enters q
-	int points = 0;//integer to store total points
-	bool checked[PILESIZE];
+
+
+	int input; //for user input
+	int points = 0; // game score
+	bool checked[PILESIZE]; //array to check for flips on same card
+
+	//init array
 	for (int i=0; i<PILESIZE; i++)
 	{
 		checked[i]=false;
 	}
+
+	//main game loop
 	do
 	{
-		int cardNumber;//int to store desired card to flip
-		cout << "Enter a number between 1 and " << PILESIZE << " to flip that card: ";
-		cin >> cardNumber;//get desired card number to flip
-		//trigger if card is in range
-		if (cardNumber <= PILESIZE && checked[cardNumber]==false)
-		{
-			checked[cardNumber] = true; //mark card as flipped
-			//create pointer to the desired card
-			node<card> *pointCard = choosePile.traverse(cardNumber);
-			//update points- pass by reference and change directly
-			pointCard->nodeValue.getPoints(points);
-			cout << endl << "Current Points: " << points << endl;//print points
+		cout << endl << "Current Points: " << points << endl;//print points
+		cout << "Enter a number between 1 and " << PILESIZE << "to flip that card, 0 to quit: ";
+		cin >> input;//get desired card number to flip
+
+		//if quit condition
+		if (input <= 0) {
+			printf("Game ending. Final score is: %d\n", points);
+			return;
 		}
-		else if(cardNumber>PILESIZE) //triggger if card is out of range
+		//if card is in range
+		else if (input <= PILESIZE) 
+			//if the card has not been flipped
+			if (!checked[input - 1]) {
+				//mark card as flipped
+				checked[input - 1] = true; 
+				//get the card (node)
+				node<card> *pointCard = choosePile.traverse(input - 1);
+				//update points- pass by reference and change directly
+				pointCard->nodeValue.getPoints(points);
+			}
+			//the card has already been flipeped
+			else {
+				cout << "You already flipped that card!." << endl;
+			}
+		//invalid integer input (out of range)
+		else 
 		{
-			cout << "That card is out of range" << endl;
+			cout << "That card is invalid." << endl;
 		}
-		else if(checked[cardNumber]==true)
-		{
-			cout<<"You've already flipped that card"<<endl;
-		}
-		cout << "Press q to quit, or any other key to continue" << endl;
-		cin >> playerStatus;
-	} while (playerStatus != 'q');
+	} while (1);
 }

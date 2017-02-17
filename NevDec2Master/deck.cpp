@@ -86,10 +86,6 @@ deck::~deck()
         //get the next node in the list
         nextNode = currentNode->next;
 
-		//debugging
-		cout << "Node Deleted: " << counter << ", " << currentNode << endl;
-		cout << "Next Node: " << counter << ", " << currentNode->next << endl;
-
         //delete the node pointer
         delete currentNode;
 
@@ -101,10 +97,6 @@ deck::~deck()
     }
     while (nextNode != NULL);
 
-
-    //debug statement to ensure that all the nodes were deleted
-    cout << "Deleted " << counter << " nodes" << endl;
-    system("pause");
 } //End of destructor
 
 //The shuffle function picks a random card from the deck and places it on top.

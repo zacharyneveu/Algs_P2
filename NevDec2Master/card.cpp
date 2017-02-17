@@ -165,35 +165,30 @@ void card::getPoints(int &points)
 		points += 10; //ace+=10 points
 		break;
 	case TWO:
-		points = 0;
-		break;
 	case THREE:
-		points = 0;
-		break;
 	case FOUR:
-		points = 0;
-		break;
 	case FIVE:
-		points = 0;
-		break;
 	case SIX:
+		//fall through
 		points = 0;
 		break;
 	case SEVEN:
 		points /= 2;
 		break;
-	case EIGHT:	break;
-	case NINE:	break;
-	case TEN:	break;
+	case EIGHT: 
+	case NINE:	
+	case TEN:
+		//fall through
+		break;
 	case JACK:
-		points += 5;
-		break;
 	case QUEEN:
-		points += 5;
-		break;
 	case KING:
+		//fall through
 		points += 5;
 		break;
 	}
-
+	if (this->suit == HEART) {
+		points += 1;
+	}
+	return;
 }
