@@ -15,16 +15,12 @@ class deck
 private:
 	//Head holds top card of deck
     node<card> *head;
-
-	//bottom holds bottom card of deck
-	node<card> *bottom;
-
 public:
     //default constructor for deck
     deck();
 
 	//Constructor to manually create pile of cards as deck
-	deck(node<card> *head);
+	deck(bool fulldeck);
 
     //default destructor for deck
     ~deck();
@@ -34,7 +30,7 @@ public:
     void shuffle();
 
 	//Deal function returns the top card of the deck and removes it
-	node<card> deal();
+	node<card> * deal();
 
 	//Replace function is passed a card and returns it to the bottom of the
 	//deck.

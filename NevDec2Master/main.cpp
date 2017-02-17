@@ -10,15 +10,12 @@
 
 #define PILESIZE 24 //Define size of pile of cards chosen from deck
 
-void playFlip(deck PassedDeck);
+void playFlip();
 
 int main()
 {
-	//Initialize a deck to play with
-	deck playDeck;
-
 	//Play game function
-	//playFlip(playDeck);
+	playFlip();
 
 	//debugging line
 	cout<<"Back in the main function"<<endl;
@@ -34,19 +31,14 @@ int main()
 //3. Player can either select a card to turn over or end the game.  points
 //tally of points kept throughout.  Game should remember which cards have
 //been flipped.
-void playFlip(deck PassedDeck)
+void playFlip()
 {
-	PassedDeck.shuffle(); //Instructions said to shuffle three times?
-	//PassedDeck.shuffle(); //Deck in random order after once
-	//PassedDeck.shuffle();
+	deck playDeck;
+	deck choosePile(false);
 
-	node<card> firstCard = PassedDeck.deal();
-	deck choosePile(&firstCard);//create new "deck" to store pile of 24 cards.
-	node<card> newCard(&firstCard.nodeValue);//Random values needed to construct
-	for (int i=1; i<PILESIZE; i++)//Start at one because top card already passed
+	for (int i=0; i<PILESIZE; i++)//Start at one because top card already passed
 	{
-		newCard = PassedDeck.deal();//Remove card from main deck
-		choosePile.addTop(&newCard);//add card to pile
+		choosePile.replace(playDeck.deal());//Remove card from main deck
 	}
 	cout<<"Printing drawn pile"<<endl;
 	cout<<choosePile<<endl;

@@ -17,69 +17,68 @@
 //Constructor initializes deck with all cards in order
 deck::deck()
 {
-    //Begin function with empty list
-    head = NULL;
-	bottom = NULL;
+	//Begin function with empty list
+	head = NULL;
 
-    //Create pointer to current card
-    node<card> *current = NULL;
+	//Create pointer to current card
+	node<card> *current = NULL;
 
-    //Initialize the first card in the deck
-    card firstCard((suit)0, (value)0);
-    //Initialize the first node of the list with NULL next pointer
-    head = new node<card>(firstCard, NULL);
+	//Initialize the first card in the deck
+	card firstCard((suit)0, (value)0);
+	//Initialize the first node of the list with NULL next pointer
+	head = new node<card>(firstCard, NULL);
 
-    //Set current node to head
-    current = head;
+	//Set current node to head
+	current = head;
 
-    //Outer for loop iterates over suits
-    for (int i = 0; i < 4; i++)
-    {
-        //Inner for loop iterates over values
-        for (int j = 0; j < 13; j++)
-        {
-            //If statement doesn't trigger on the first loop, because the first
-            //node has already been created.
-            if (!(i == 0 && j == 0))
-            {
-                //Create card to store in node with suit of i and value of j
-                card tempCard((suit)(i), (value)(j));
-                //Create a new node with the new card inside
-                node<card> *temp = new node<card>(tempCard, NULL);
-                //link new node into list
-                current->next = temp;
-                //Advance current to the new node
-                current = temp;
-				//bottom will always be latest created
-				bottom = current;
-            }//ends if statement
-        }//ends inner for loop
-    }//ends outer for loop
+	//Outer for loop iterates over suits
+	for (int i = 0; i < 4; i++)
+	{
+		//Inner for loop iterates over values
+		for (int j = 0; j < 13; j++)
+		{
+			//If statement doesn't trigger on the first loop, because the first
+			//node has already been created.
+			if (!(i == 0 && j == 0))
+			{
+				//Create card to store in node with suit of i and value of j
+				card tempCard((suit)(i), (value)(j));
+				//Create a new node with the new card inside
+				node<card> *temp = new node<card>(tempCard, NULL);
+				//link new node into list
+				current->next = temp;
+				//Advance current to the new node
+				current = temp;
+			}//ends if statement
+		}//ends inner for loop
+	}//ends outer for loop
 }//End of constructor
 
 
 //Constructor to manually create pile of cards as deck
-deck::deck(node<card> * head)
+deck::deck(bool fulldeck)
 {
-	this->head = head;
-	this->head->next = NULL;
-	this->bottom = head;
-	this->bottom->next = NULL;
+	if (fulldeck) {
+		deck();
+	}
+	else {
+		this->head == NULL;
+	}
 }
 
 //Destructor destroys linked list, freeing memory locations
 deck::~deck()
 {
+	if (this == NULL) {
+		return;
+	}
+	if (this->head == NULL) {
+		return;
+	}
     //variables for iterating through list
     node<card> * currentNode = this->head;
     node<card> * nextNode = this->head;
     int counter = 0;
-
-    //if the deck is empty, return
-    if (this->head == NULL)
-    {
-        return;
-    }
 
     //while the linked list isn't empty
     do
@@ -88,7 +87,8 @@ deck::~deck()
         nextNode = currentNode->next;
 
 		//debugging
-		cout<<"Node Deleted: "<<counter<<", "<<currentNode->nodeValue<<endl;
+		cout << "Node Deleted: " << counter << ", " << currentNode << endl;
+		cout << "Next Node: " << counter << ", " << currentNode->next << endl;
 
         //delete the node pointer
         delete currentNode;
@@ -99,11 +99,12 @@ deck::~deck()
         //set the current node to the next node
         currentNode = nextNode;
     }
-    while (currentNode->next != NULL);
+    while (nextNode != NULL);
+
 
     //debug statement to ensure that all the nodes were deleted
-    //cout << "Deleted " << counter << " nodes" << endl;
-    //system("pause");
+    cout << "Deleted " << counter << " nodes" << endl;
+    system("pause");
 } //End of destructor
 
 //The shuffle function picks a random card from the deck and places it on top.
@@ -146,32 +147,43 @@ void deck::shuffle()
 	{
 		currNode = currNode->next;
 	}
-	bottom = currNode;
 }//End of shuffle function
 
 //Deal function returns the top card of the deck and removes it
 //Returns node with card inside
-node<card> deck::deal()
+node<card> * deck::deal()
 {
 	node<card> *temp = head;
 	head = head->next;
 	temp->next = NULL; //make sure temp is unlinked
-	return *temp;
+	return temp;
 }
 
 //Replace function is passed a node<card> and returns it to the bottom of the
 //deck.
 void deck::replace(node<card> *newBottom)
 {
-	//insert new card after bottom
-	bottom->next = newBottom;
+	if (this->head == NULL) {
+		this->head = newBottom;
+		return;
+	}
+	node<card> *nextNode = this->head;
+	while (nextNode->next != NULL) {
+		nextNode = nextNode->next;
+	}
+	nextNode->next = newBottom;
 	newBottom->next = NULL;
+	return;
 }
 
 //Add at top is passed a pointer to a card, and adds the card to the top
 //of the deck, allocating memory for it.
 void deck::addTop(node<card> *newTop)
 {
+	if (this->head == NULL) {
+		this->head = newTop;
+		return;
+	}
 	node<card> *toAdd = new node<card>(newTop->nodeValue);
 	toAdd->next = head;
 	head = toAdd;
