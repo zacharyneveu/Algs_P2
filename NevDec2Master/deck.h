@@ -42,6 +42,7 @@ public:
 
     //Traverse function moves through the deck by a specified number of cards and
     //returns a pointer to the card at that position.
+	//Caller is responible for validating the card index is valid.
     node<card>* traverse(int cardNumber);
 
 

@@ -56,6 +56,8 @@ deck::deck()
 
 
 //Constructor to manually create pile of cards as deck
+//true will create a normal deck of 52.
+//false will create an empty deck
 deck::deck(bool fulldeck)
 {
     if (fulldeck)
@@ -71,11 +73,13 @@ deck::deck(bool fulldeck)
 //Destructor destroys linked list, freeing memory locations
 deck::~deck()
 {
+	//edge case
     if (this == NULL)
     {
         return;
     }
-
+	
+	//edge case
     if (this->head == NULL)
     {
         return;
@@ -162,6 +166,7 @@ node<card> * deck::deal()
 //deck.
 void deck::replace(node<card> *newBottom)
 {
+	//if the deck is empty, add at the head
     if (this->head == NULL)
     {
         this->head = newBottom;
@@ -170,11 +175,13 @@ void deck::replace(node<card> *newBottom)
 
     node<card> *nextNode = this->head;
 
+	//iterate through deck until the end
     while (nextNode->next != NULL)
     {
         nextNode = nextNode->next;
     }
 
+	//addthe card and set its next pointer to null
     nextNode->next = newBottom;
     newBottom->next = NULL;
     return;
@@ -184,23 +191,28 @@ void deck::replace(node<card> *newBottom)
 //of the deck, allocating memory for it.
 void deck::addTop(node<card> *newTop)
 {
+	//if the deck is empty, add at the head
     if (this->head == NULL)
     {
         this->head = newTop;
         return;
     }
 
+	//replace the head with the new element, and link the old head
     node<card> *toAdd = new node<card>(newTop->nodeValue);
     toAdd->next = head;
     head = toAdd;
+	return;
 }
 
 //Overloaded operator << displays the values stored in a card.
 ostream& operator<< (ostream& ostr, const deck& deck)
 {
+	//counter to see how many items printed
     int lineMarker = 0;
     node<card> cardNode = *deck.head;
 
+	//If there is no deck, just return the outstream
     if (deck.head == NULL)
     {
         return ostr;
@@ -233,10 +245,12 @@ ostream& operator<< (ostream& ostr, const deck& deck)
 
 //Traverse function moves through the deck by a specified number of cards and
 //returns a pointer to the card at that position.
+//Caller is responisble for verifying the index is a valid indec of the set.
 node<card>* deck::traverse(int cardNumber)
 {
     node<card> *currNode = this->head;
 
+	//loop through deck until index is found.
     for (int i = 0; i < cardNumber; i++)
     {
         currNode = currNode->next;

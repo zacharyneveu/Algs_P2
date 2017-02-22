@@ -11,7 +11,6 @@
 //Some includes
 #include <iostream>
 #include <string>
-//Return the face Value of this card
 
 using namespace std;
 

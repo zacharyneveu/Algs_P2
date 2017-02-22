@@ -170,28 +170,30 @@ void card::getPoints(int &points)
     case FOUR:
     case FIVE:
     case SIX:
-        //fall through
+        //fall through (set points to 0
         points = 0;
         break;
 
     case SEVEN:
+		//score divided by 2
         points /= 2;
         break;
 
     case EIGHT:
     case NINE:
     case TEN:
-        //fall through
+        //fall through: zero pointed added
         break;
 
     case JACK:
     case QUEEN:
     case KING:
-        //fall through
+        //fall through: 5 points added
         points += 5;
         break;
     }
 
+	//add one point to the score, regardless of face value pulled
     if (this->suit == HEART)
     {
         points += 1;

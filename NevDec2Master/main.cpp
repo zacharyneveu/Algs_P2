@@ -17,9 +17,6 @@ int main()
     //Play game function
     playFlip();
 
-    //debugging line
-    //cout<<"Back in the main function"<<endl;
-
     //add a system pause to keep the visual studio terminal open
     system("pause");
 }//End of main function
@@ -36,6 +33,7 @@ void playFlip()
     deck playDeck;
     deck choosePile(false);
 
+	//print out the deck
     cout << "Printing unshuffled deck" << endl;
     cout << playDeck << endl;
 
@@ -43,6 +41,7 @@ void playFlip()
     playDeck.shuffle();
     playDeck.shuffle();
 
+	//print shuffled deck
     cout << "Printing shuffled deck" << endl;
     cout << playDeck << endl;
 
@@ -53,6 +52,7 @@ void playFlip()
         choosePile.replace(playDeck.deal());
     }
 
+	//print out the drawn pile
     cout << "Printing drawn pile" << endl;
     cout << choosePile << endl;
 
@@ -102,8 +102,8 @@ void playFlip()
         //invalid integer input (out of range)
         else
         {
-            cout << "That card is invalid." << endl;
+            cout << "That card number is invalid." << endl;
         }
-    }
-    while (1);
-}
+    } 
+	while (1);//loop until quit condition. 
+}//end playFlip()
