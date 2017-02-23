@@ -23,10 +23,10 @@ int main()
 
 //playFlip function implements a game of Flip reading from the user
 //Steps:
-//1. Cards are shuffled (three times... why?)
+//1. Cards are shuffled
 //2. Deal 24 cards (face down but read for testing)
-//3. Player can either select a card to turn over or end the game.  points
-//tally of points kept throughout.  Game should remember which cards have
+//3. Player can either select a card to turn over or end the game.
+//Tally of points kept throughout.  Game should remember which cards have
 //been flipped.
 void playFlip()
 {
@@ -37,6 +37,7 @@ void playFlip()
     cout << "Printing unshuffled deck" << endl;
     cout << playDeck << endl;
 
+	//Cards shuffled three times
     playDeck.shuffle();
     playDeck.shuffle();
     playDeck.shuffle();
@@ -61,7 +62,7 @@ void playFlip()
     int points = 0; // game score
     bool checked[PILESIZE]; //array to check for flips on same card
 
-    //init array
+    //init array for memory of flipped cards
     for (int i = 0; i < PILESIZE; i++)
     {
         checked[i] = false;
@@ -104,6 +105,6 @@ void playFlip()
         {
             cout << "That card number is invalid." << endl;
         }
-    } 
-	while (1);//loop until quit condition. 
+    }
+	while (1);//loop until quit condition.
 }//end playFlip()

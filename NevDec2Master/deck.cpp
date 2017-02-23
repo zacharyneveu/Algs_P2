@@ -78,7 +78,7 @@ deck::~deck()
     {
         return;
     }
-	
+
 	//edge case
     if (this->head == NULL)
     {
