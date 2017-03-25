@@ -32,5 +32,8 @@
     <ClInclude Include="deck.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="d_node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

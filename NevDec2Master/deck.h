@@ -1,25 +1,51 @@
-//includes
-#include "card.h"
-#include <vector>
+//Zachary Neveu | neveu.z@husky.neu.edu
+//Jake Dec | dec.j@husky.neu.edu
+//
+//This file includes the declaration of the Deck class. This class is used to
+//create and manage a deck of cards as a linked list.  Implementations for this
+//class can be found in deck.cpp
+
+#include "card.h" //user defined class with card class
+#include "d_node.h" //declaration of linked list template class
 
 using namespace std;
 
-class deck {
+class deck
+{
 private:
-	card * head;
-
-	//the deconstructDeck function takes the linked list deck and converts it
-	//into a vector for use by the shuffle function
-	std::vector<card> deconstructDeck();
-
-	//The reconstructDeck function takes the vector of cards created by the
-	//deconstructDeck function and re-assembles it into a linked list
-	void reconstructDeck(vector<card> cards);
+    //Head holds top card of deck
+    node<card> *head;
 public:
-	deck(card * card);
+    //default constructor for deck
+    deck();
 
-	//The shuffle function uses the random_shuffle function from the
-	//algorithms library to randomly re-order the deck of cards
-	void shuffle();
-	friend ostream& operator<< (ostream& ostr, const deck &deck);
+    //Constructor to manually create pile of cards as deck
+    deck(bool fulldeck);
+
+    //default destructor for deck
+    ~deck();
+
+    //The shuffle function picks a random card from the deck and places it on top.
+    //This process is repeated 1000 times.
+    void shuffle();
+
+    //Deal function returns the top card of the deck and removes it
+    node<card> * deal();
+
+    //Replace function is passed a card and returns it to the bottom of the
+    //deck.
+    void replace(node<card> *newBottom);
+
+    //Add at top is passed a pointer to a card, and adds the card to the top
+    //of the deck, allocating memory for it.
+    void addTop(node<card> *newTop);
+
+    //Traverse function moves through the deck by a specified number of cards and
+    //returns a pointer to the card at that position.
+	//Caller is responible for validating the card index is valid.
+    node<card>* traverse(int cardNumber);
+
+
+    //Overloaded << operator that prints a deck to the output stream
+    friend ostream& operator<< (ostream& ostr, const deck &deck);
 };
